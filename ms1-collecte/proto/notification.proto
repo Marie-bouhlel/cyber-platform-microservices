@@ -1,0 +1,31 @@
+syntax = "proto3";
+package notification;
+
+service NotificationService {
+	rpc EnvoyerNotification (NotifRequest) returns (NotifResponse);
+	rpc GetRapports (EmptyRequest) returns (RapportsResponse);
+}
+
+message NotifRequest {
+	string incident_id = 1;
+	string niveau_risque = 2;
+	string message = 3;
+}
+
+message NotifResponse {
+	bool succes = 1;
+	string rapport_id = 2;
+}
+
+message EmptyRequest {}
+
+message RapportsResponse {
+	repeated Rapport rapports = 1;
+}
+
+message Rapport {
+	string id = 1;
+	string incident_id = 2;
+	string message = 3;
+	string timestamp = 4;
+}

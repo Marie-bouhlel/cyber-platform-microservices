@@ -1,0 +1,36 @@
+syntax = "proto3";
+package analyse;
+
+service AnalyseService {
+	rpc AnalyserIncident (AnalyseRequest) returns (AnalyseResponse);
+	rpc GetIncidents (FiltreRequest) returns (IncidentsResponse);
+}
+
+message AnalyseRequest {
+	string alerte_id = 1;
+	string type_attaque = 2;
+	string severite = 3;
+}
+
+message AnalyseResponse {
+	string incident_id = 1;
+	string niveau_risque = 2;
+	string recommandation = 3;
+	bool succes = 4;
+}
+
+message FiltreRequest {
+	string niveau_risque = 1;
+}
+
+message IncidentsResponse {
+	repeated Incident incidents = 1;
+}
+
+message Incident {
+	string id = 1;
+	string alerte_id = 2;
+	string niveau_risque = 3;
+	string recommandation = 4;
+	string timestamp = 5;
+}
