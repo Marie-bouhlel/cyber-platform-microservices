@@ -1,0 +1,47 @@
+syntax = "proto3";
+package collecte;
+
+service CollecteService {
+	rpc EnvoyerAlerte (AlerteRequest) returns (AlerteResponse);
+	rpc ListerAlertes (FiltreRequest) returns (AlertesResponse);
+	rpc SupprimerAlerte (IdRequest) returns (StatusResponse);
+}
+
+message AlerteRequest {
+	string source_ip = 1;
+	string type_attaque = 2;
+	string severite = 3;
+	string description = 4;
+}
+
+message AlerteResponse {
+	string id = 1;
+	bool succes = 2;
+	string message = 3;
+}
+
+message FiltreRequest {
+	string severite = 1;
+}
+
+message AlertesResponse {
+	repeated Alerte alertes = 1;
+}
+
+message Alerte {
+	string id = 1;
+	string source_ip = 2;
+	string type_attaque = 3;
+	string severite = 4;
+	string description = 5;
+	string timestamp = 6;
+}
+
+message IdRequest {
+	string id = 1;
+}
+
+message StatusResponse {
+	bool succes = 1;
+	string message = 2;
+}
